@@ -11,7 +11,7 @@ const CanvasModel = () => {
       shadows
       camera={{ fov: 25, position: [0, 0, 0] }}
       gl={{ preserveDrawingBuffer: true }}
-      className="w-full max-w-full h-full transition-all ease-in"
+      className="w-full max-w-full h-full transition-all ease-in touch-none"
     >
       <ambientLight intensity={0.5} />
       <Environment preset="city" />
