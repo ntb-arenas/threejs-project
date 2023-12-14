@@ -19,6 +19,8 @@ import {
 const Customizer = () => {
   const snap = useSnapshot(state);
 
+  //show tab content depending on the activeTab
+
   return (
     <AnimatePresence>
       {!snap.intro && (
@@ -28,7 +30,7 @@ const Customizer = () => {
             className="absolute top-0 "
             {...slideAnimation("left")}
           >
-            <div className="flex items.center min-h-screen">
+            <div className="flex items-center min-h-screen">
               <div className="editortabs-container tabs">
                 {EditorTabs.map((tab) => (
                   <Tab
