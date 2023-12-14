@@ -18,7 +18,7 @@ const Home = () => {
     <AnimatePresence>
       {snap.intro && (
         <motion.section
-          className="home"
+          className="home "
           {...slideAnimation("left")}
         >
           <motion.header {...slideAnimation("down")}>
