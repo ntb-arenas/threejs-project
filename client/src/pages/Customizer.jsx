@@ -50,7 +50,7 @@ const Customizer = () => {
         <>
           <motion.div
             key="custom"
-            className="absolute top-0 "
+            className="absolute top-0 touch-none"
             {...slideAnimation("left")}
           >
             <div className="flex items-center min-h-screen">
