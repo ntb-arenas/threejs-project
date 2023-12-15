@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSnapshot } from "valtio";
 
@@ -18,9 +18,9 @@ import {
 
 const Customizer = () => {
   const snap = useSnapshot(state);
+  const tabsRef = useRef(null);
 
   const [file, setFile] = useState("");
-
   const [prompt, setPrompt] = useState("");
   const [generatingImg, setGeneratingImg] = useState(false);
 
@@ -29,6 +29,19 @@ const Customizer = () => {
     logoShirt: true,
     stylishShirt: false,
   });
+
+  const handleOutsideClick = (e) => {
+    if (tabsRef.current && !tabsRef.current.contains(e.target)) {
+      setActiveEditorTab("");
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   //show tab content depending on the activeTab
   const generateTabContent = () => {
@@ -45,16 +58,19 @@ const Customizer = () => {
   };
 
   return (
-    <AnimatePresence>
+    <AnimatePresence className="touch-none">
       {!snap.intro && (
         <>
           <motion.div
             key="custom"
-            className="absolute top-0 touch-none"
+            className="absolute top-0 "
             {...slideAnimation("left")}
           >
             <div className="flex items-center min-h-screen">
-              <div className="editortabs-container tabs">
+              <div
+                className="editortabs-container tabs"
+                ref={tabsRef}
+              >
                 {EditorTabs.map((tab) => (
                   <Tab
                     key={tab.name}
