@@ -3,7 +3,7 @@ import CustomButton from "./CustomButton";
 
 const FilePicker = ({ file, setFile, readFile }) => {
   return (
-    <div className="filepicker-container">
+    <div className="filepicker-container touch-none">
       <div className="flex flex-col flex-1">
         <input
           id="file-upload"

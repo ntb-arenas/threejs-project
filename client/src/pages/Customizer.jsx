@@ -93,12 +93,12 @@ const Customizer = () => {
   };
 
   return (
-    <AnimatePresence className="touch-none">
+    <AnimatePresence>
       {!snap.intro && (
         <>
           <motion.div
             key="custom"
-            className="absolute top-0 "
+            className="absolute top-0 touch-none"
             {...slideAnimation("left")}
           >
             <div className="flex items-center min-h-screen">
@@ -124,7 +124,7 @@ const Customizer = () => {
           </motion.div>
 
           <motion.div
-            className="absolute z-10 top-5 right-5"
+            className="absolute z-10 top-5 right-5 touch-none"
             {...fadeAnimation}
           >
             <CustomButton
@@ -136,7 +136,7 @@ const Customizer = () => {
           </motion.div>
 
           <motion.div
-            className="filtertabs-container"
+            className="filtertabs-container touch-none"
             {...slideAnimation("up")}
           >
             {FilterTabs.map((tab) => (
