@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
@@ -16,6 +16,7 @@ const CameraRig = ({ children }) => {
 
     // set the initial position of the model
     let targetPosition = [-0.4, 0, 2];
+
     if (snap.intro) {
       if (isBreakpoint) targetPosition = [0, 0, 2];
       if (isMobile) targetPosition = [0, 0.1, 2.5];
@@ -28,12 +29,14 @@ const CameraRig = ({ children }) => {
     easing.damp3(state.camera.position, targetPosition, 0.25, delta);
 
     // set the model rotation smoothly
-    easing.dampE(
-      group.current.rotation,
-      [state.pointer.y / 10, -state.pointer.x / 5, 0],
-      0.25,
-      delta
-    );
+
+    let pointerRotation = [state.pointer.y / 10, -state.pointer.x / 5, 0];
+
+    isMobile
+      ? (pointerRotation = [state.pointer.y / -10, -state.pointer.x / -5, 0])
+      : pointerRotation;
+
+    easing.dampE(group.current.rotation, pointerRotation, 0.25, delta);
   });
 
   return <group ref={group}>{children}</group>;
